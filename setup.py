@@ -9,7 +9,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-plus',
-    version='0.0.12',
+    version='0.0.11',
     packages=find_packages(),
     include_package_data=True,
     license='MIT License',
@@ -18,10 +18,10 @@ setup(
     url='https://panel.yektanet.com/',
     author='Yektanet DEVs',
     author_email='info@yektanet.com',
-    # install_requires=[
-    #     'django',
-    #     'jdatetime'
-    # ],
+    install_requires=[
+        'django',
+        'jdatetime'
+    ],
     classifiers=[
         'Environment :: Web Environment',
         'Framework :: Django',
