@@ -1,0 +1,5 @@
+.idea/
+*__pycache__*
+yn_advertiser.egg-info/
+dist/
+pip
