@@ -1,6 +1,6 @@
 from django.conf import settings
 
-from django_plus.cookie_helper import SimpleCookie
+from django_plus.cookie_helper.cookie_classes import SimpleCookie
 
 
 class CookieParam:
