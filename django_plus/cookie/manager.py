@@ -1,4 +1,4 @@
-from django_plus.cookie_helper import CookieParam
+from django_plus.cookie import CookieParam
 
 
 def get_cookie_handler(cookies, cookie_params, default_cookie_domain=None):

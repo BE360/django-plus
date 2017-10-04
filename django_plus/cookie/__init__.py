@@ -1,4 +1,4 @@
-from ..cookie_helper import cookie_classes
+from ..cookie import cookie_classes
 from .cookie_param import CookieParam
-from ..cookie_helper import utils
+from ..cookie import utils
 from .manager import get_cookie_handler

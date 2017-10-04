@@ -1,6 +1,6 @@
 from collections import Counter
 
-from django_plus.cookie_helper import cookie_classes, utils
+from django_plus.cookie import cookie_classes, utils
 
 
 class CounterCookie(cookie_classes.SimpleCookie):

@@ -1,4 +1,4 @@
-from django_plus.cookie_helper.cookie_classes import SimpleCookie
+from django_plus.cookie.cookie_classes import SimpleCookie
 
 
 class CookieParam:

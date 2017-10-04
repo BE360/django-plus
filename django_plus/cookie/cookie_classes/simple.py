@@ -1,4 +1,4 @@
-from django_plus.cookie_helper import utils
+from django_plus.cookie import utils
 
 
 class SimpleCookie:
