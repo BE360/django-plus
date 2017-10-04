@@ -1,5 +1,5 @@
 from typing import List
-import django_plus.api.cleanifier as cleaners
+from django_plus.api import cleanifier as cleaners
 import collections
 
 
