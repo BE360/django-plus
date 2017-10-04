@@ -1,8 +1,9 @@
 from django_plus.cookie import CookieParam
+from .handler_class import HandlerClass
 
 
-def get_cookie_handler(cookies, cookie_params, default_cookie_domain=None):
-    handler = {}
+def get_cookie_handler(cookies, cookie_params, default_cookie_domain=None) -> HandlerClass:
+    handler = HandlerClass()
 
     for param in cookie_params:  # type: CookieParam
 
