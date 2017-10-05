@@ -1,5 +1,3 @@
-from django.conf import settings
-
 from datetime import datetime
 from collections import Counter
 
@@ -16,12 +14,12 @@ PARTIAL_TIME_SEPARATOR = '$'
 
 def cookie_encrypt(cookie_str: str, encryption=False) -> str:
     """
-    encrypt string with translate function (if cookie encryption is enabled in settings)
+    encrypt string with translate function
     :param cookie_str: raw input string
     :param encryption: encrypt or not
     :return: encrypted string to usually be saved in cookie's value
     """
-    if not settings.COOKIE_ENCRYPTION_ENABLED and not encryption:
+    if not encryption:
         return cookie_str
     trans_tab = str.maketrans(COOKIE_ENCRYPTION_KEY, COOKIE_DECRYPTION_KEY)
     return cookie_str.translate(trans_tab)
@@ -29,12 +27,12 @@ def cookie_encrypt(cookie_str: str, encryption=False) -> str:
 
 def cookie_decrypt(encrypted_str: str, encryption=False) -> str:
     """
-    decrypt string with translate function (if cookie encryption is enabled in settings)
+    decrypt string with translate function
     :param encrypted_str: input usually from cookie's value
     :param encryption: encrypted or not
     :return: decrypted string
     """
-    if not settings.COOKIE_ENCRYPTION_ENABLED and not encryption:
+    if not encryption:
         return encrypted_str
     trans_tab = str.maketrans(COOKIE_DECRYPTION_KEY, COOKIE_ENCRYPTION_KEY)
     return encrypted_str.translate(trans_tab)
