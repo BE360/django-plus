@@ -82,7 +82,7 @@ class AdvancedAdmin(ModelAdmin):
 
                     if isinstance(appear_condition, str):
                         try:
-                            if not getattr(self, appear_condition)(self, obj):
+                            if not getattr(self, appear_condition)(obj):
                                 to_remove_fields.append(field)
 
                         except AttributeError:
@@ -105,7 +105,7 @@ class AdvancedAdmin(ModelAdmin):
 
                     if isinstance(readonly_condition, str):
                         try:
-                            if getattr(self, readonly_condition)(self, obj):
+                            if getattr(self, readonly_condition)(obj):
                                 should_be_readonly_fields.append(field)
 
                         except AttributeError:
