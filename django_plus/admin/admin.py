@@ -102,15 +102,17 @@ class AdvancedAdmin(ModelAdmin):
                 readonly_condition = condition[2]
 
                 if readonly_condition:
-                    try:
-                        if not getattr(self, readonly_condition)(self, obj):
-                            continue
 
-                    except AttributeError:
-                        pass
+                    if isinstance(readonly_condition, str):
+                        try:
+                            if getattr(self, readonly_condition)(self, obj):
+                                should_be_readonly_fields.append(field)
 
-                    # If code reached here we should disappear field from fieldset
-                    should_be_readonly_fields.append(field)
+                        except AttributeError:
+                            pass
+
+                    else:
+                        should_be_readonly_fields.append(field)
 
         return should_be_readonly_fields
 
