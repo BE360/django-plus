@@ -58,8 +58,12 @@ class AdvancedAdmin(ModelAdmin):
         return fieldset
 
     def get_readonly_fields(self, request, obj=None):
+        readonly_fields = ['get_media_files_for_main_page', 'get_media_files_for_list_page'] + \
+                          self.get_should_be_readonly_fields(obj)
+
         readonly = super(AdvancedAdmin, self).get_readonly_fields(request, obj)
-        return append_list(readonly, ['get_media_files_for_main_page', 'get_media_files_for_list_page'], unique=True)
+
+        return append_list(readonly, readonly_fields, unique=True)
 
     def get_list_display(self, request):
         list_display = super(AdvancedAdmin, self).get_list_display(request)
@@ -75,17 +79,40 @@ class AdvancedAdmin(ModelAdmin):
                 appear_condition = condition[1]
 
                 if appear_condition:
+
+                    if isinstance(appear_condition, str):
+                        try:
+                            if not getattr(self, appear_condition)(self, obj):
+                                to_remove_fields.append(field)
+
+                        except AttributeError:
+                            pass
+
+                else:
+                    to_remove_fields.append(field)
+
+        return to_remove_fields
+
+    def get_should_be_readonly_fields(self, obj):
+        should_be_readonly_fields = []
+
+        for condition in self.fieldsets_conditions:
+            if len(condition) >= 3:
+                field = condition[0]
+                readonly_condition = condition[2]
+
+                if readonly_condition:
                     try:
-                        if getattr(self, appear_condition)(self, obj):
+                        if not getattr(self, readonly_condition)(self, obj):
                             continue
 
                     except AttributeError:
-                        continue
+                        pass
 
-                # If code reached here we should disappear field from fieldset
-                to_remove_fields.append(field)
+                    # If code reached here we should disappear field from fieldset
+                    should_be_readonly_fields.append(field)
 
-        return to_remove_fields
+        return should_be_readonly_fields
 
     def get_media_files_for_main_page(self, model):
         return self.generate_media('field-get_media_files_for_main_page', self.main_page_css, self.main_page_js)
