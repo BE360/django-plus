@@ -18,7 +18,7 @@ class AdvancedAdmin(ModelAdmin):
     list_display_js = []
     list_display_css = []
 
-    fieldset_conditions = []  # (field, appear_condition, readonly_condition)
+    fieldsets_conditions = []  # (field, appear_condition, readonly_condition)
 
     __latest_list_page_full_path = ""
 
@@ -69,7 +69,7 @@ class AdvancedAdmin(ModelAdmin):
     def get_to_remove_fields(self, obj):
         to_remove_fields = []
 
-        for condition in self.fieldset_conditions:
+        for condition in self.fieldsets_conditions:
             if len(condition) >= 2:
                 field = condition[0]
                 appear_condition = condition[1]
