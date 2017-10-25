@@ -40,23 +40,25 @@ def admin_field_generator(verbose_name, function_changer=None, path_to_field=Non
             :return: a string to show in django panel
             """
 
-            if verbose_name:
-                wrapped.short_description = verbose_name
-            elif path_to_field:
+            if not verbose_name and path_to_field:
                 wrapped.short_description = model_inst._meta.get_field(path_to_field).verbose_name
-            else:
-                wrapped.short_description = ""
-
-            if path_to_field:
-                wrapped.admin_order_field = path_to_field
-
-            wrapped.allow_tags = html
-            wrapped.boolean = boolean
 
             if function_changer:
                 return function_changer(func, admin_inst, model_inst)
             else:
                 return default_function_changer(func, admin_inst, model_inst)
+
+        if verbose_name:
+            wrapped.short_description = verbose_name
+
+        else:
+            wrapped.short_description = ""
+
+        if path_to_field:
+            wrapped.admin_order_field = path_to_field
+
+        wrapped.allow_tags = html
+        wrapped.boolean = boolean
 
         return wrapped
 
