@@ -18,6 +18,8 @@ class AdvancedAdmin(ModelAdmin):
     list_display_js = []
     list_display_css = []
 
+    fieldset_conditions = []  # (field, appear_condition, readonly_condition)
+
     __latest_list_page_full_path = ""
 
     def __init__(self, model, admin_site):
@@ -40,7 +42,14 @@ class AdvancedAdmin(ModelAdmin):
 
         fieldset = super(AdvancedAdmin, self).get_fieldsets(request, obj)
 
-        # try:
+        # removing fields with conditions
+        to_remove_fields = self.get_to_remove_fields(obj)
+
+        for fields_data in fieldset:
+            fields = fields_data[1]['fields']
+            fields_data[1]['fields'] = [f for f in fields if f not in to_remove_fields]
+
+        # inserting 'get_media_fields_for_main_page' to fieldset
         fields = fieldset[0][1]['fields']
         fields = append(fields, 'get_media_files_for_main_page', unique=True)
 
@@ -54,7 +63,29 @@ class AdvancedAdmin(ModelAdmin):
 
     def get_list_display(self, request):
         list_display = super(AdvancedAdmin, self).get_list_display(request)
+
         return append(list_display, 'get_media_files_for_list_page', unique=True)
+
+    def get_to_remove_fields(self, obj):
+        to_remove_fields = []
+
+        for condition in self.fieldset_conditions:
+            if len(condition) >= 2:
+                field = condition[0]
+                appear_condition = condition[1]
+
+                if appear_condition:
+                    try:
+                        if getattr(self, appear_condition)(self, obj):
+                            continue
+
+                    except AttributeError:
+                        continue
+
+                # If code reached here we should disappear field from fieldset
+                to_remove_fields.append(field)
+
+        return to_remove_fields
 
     def get_media_files_for_main_page(self, model):
         return self.generate_media('field-get_media_files_for_main_page', self.main_page_css, self.main_page_js)
