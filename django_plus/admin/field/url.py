@@ -12,6 +12,9 @@ def url(verbose_name="", title=None, path_to_field=None):
     def function_changer(func, admin, instance):
         link = func(admin, instance)
 
+        if not link.startswith('http://') or link.startswith('https://'):
+            link = 'http://' + link
+
         if title is None:
             url_title = link
         else:
