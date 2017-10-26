@@ -1,6 +1,7 @@
-from .generator import admin_field_generator
-from persian_date.jalali_date import jalali, DatetimeFormat
 from django.template.loader import render_to_string
+
+from django_plus.persian_date import jalali, CUSTOM_DATETIME_FORMAT, CUSTOM_DATE_FORMAT
+from .generator import admin_field_generator
 
 
 def general(verbose_name="", html=False, boolean=False, path_to_field=None):
@@ -13,7 +14,7 @@ def general(verbose_name="", html=False, boolean=False, path_to_field=None):
     )
 
 
-def date(verbose_name="", path_to_field=None, time_format=DatetimeFormat.CUSTOM_DATE):
+def date(verbose_name="", path_to_field=None, time_format=CUSTOM_DATE_FORMAT):
 
     def function_changer(func, admin, instance):
 
@@ -30,7 +31,7 @@ def date(verbose_name="", path_to_field=None, time_format=DatetimeFormat.CUSTOM_
     )
 
 
-def datetime(verbose_name="", path_to_field=None, time_format=DatetimeFormat.CUSTOM_DATETIME):
+def datetime(verbose_name="", path_to_field=None, time_format=CUSTOM_DATETIME_FORMAT):
     return date(verbose_name, path_to_field, time_format)
 
 

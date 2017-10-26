@@ -46,9 +46,3 @@ def jalali(time, time_format=None):
         time_string = pattern.sub(lambda x: weekdays_map[x.group()], time_string)
 
         return time_string
-
-
-class DatetimeFormat:
-    CUSTOM_DATETIME = "Y-m-d ساعت H:i:s"
-    CUSTOM_DATE = "Y-m-d"
-    DATE_REVERSED = "d-m-Y"
