@@ -20,22 +20,25 @@ class AdvancedAdmin(ModelAdmin):
 
     fieldsets_conditions = []  # (field, appear_condition, readonly_condition)
 
-    __latest_list_page_full_path = ""
-
     def __init__(self, model, admin_site):
         self.model = model
+        self.request = None
         super(AdvancedAdmin, self).__init__(model, admin_site)
 
     @property
     def current_list_page_full_path(self):
-        if len(self.__latest_list_page_full_path) == 0:
+        if not self.request:
             return AdminUrl(model_class=self.model).get_list_url()
 
         else:
-            return self.__latest_list_page_full_path
+            return self.request.get_full_path()
+
+    def change_view(self, request, object_id, form_url='', extra_context=None):
+        self.request = request
+        return super(AdvancedAdmin, self).change_view(request, object_id, form_url, extra_context)
 
     def changelist_view(self, request, extra_context=None):
-        self.__latest_list_page_full_path = request.get_full_path()
+        self.request = request
         return super(AdvancedAdmin, self).changelist_view(request, extra_context)
 
     def get_fieldsets(self, request, obj=None):
