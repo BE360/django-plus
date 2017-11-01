@@ -9,6 +9,32 @@ def clean_string(string):
         return None
 
 
+def advanced_string_cleaner(min_length: int=None, max_length: int=None, startswith: str=None,
+                            endswith: str=None, ):
+
+    def clean(val):
+        val = clean_string(val)
+
+        if val is None:
+            return None
+
+        if min_length and len(val) < min_length:
+            return None
+
+        if max_length and len(val) > max_length:
+            return None
+
+        if startswith and not val.startswith(startswith):
+            return None
+
+        if endswith and not val.endswith(endswith):
+            return None
+
+        return val
+
+    return clean
+
+
 def clean_integer(num):
     try:
         return int(num)

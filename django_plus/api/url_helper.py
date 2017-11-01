@@ -8,19 +8,23 @@ class UrlParam:
     int = cleaners.clean_integer
     int_pos = cleaners.clean_pos_integer
     int_pos0 = cleaners.clean_pos_integer0
-    bool = cleaners.clean_bool
-    string = cleaners.clean_string
-    datetime = cleaners.clean_datetime
     clamp_int = cleaners.clamp_int
+    int_int_pair_list = cleaners.clean_pair_list_generator(int, int)
+
+    bool = cleaners.clean_bool
+
+    string = cleaners.clean_string
+    advanced_string = cleaners.advanced_string_cleaner
+    exists_in_array = cleaners.clean_exists_in_array
+
+    datetime = cleaners.clean_datetime
+
     hash_list = cleaners.clean_by_hash_table_list
     hash = cleaners.clean_by_hash_table
-    int_int_pair_list = cleaners.clean_pair_list_generator(int, int)
-    exists_in_array = cleaners.clean_exists_in_array
 
     ignore = lambda x: x
 
     def __init__(self, key, data_type: str, stored_key: str=None, required: bool=False, default=None):
-
         self.key = key
         self.data_type = data_type
         self.required = required
