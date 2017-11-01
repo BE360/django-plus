@@ -20,7 +20,7 @@ def url(verbose_name="", title=None, path_to_field=None):
         else:
             url_title = title
 
-        return anchor_tag(url_title, link)
+        return anchor_tag(url_title, link, target='_blank')
 
     return admin_field_generator(
         verbose_name=verbose_name,

@@ -15,6 +15,7 @@ class UrlParam:
     hash_list = cleaners.clean_by_hash_table_list
     hash = cleaners.clean_by_hash_table
     int_int_pair_list = cleaners.clean_pair_list_generator(int, int)
+    exists_in_array = cleaners.clean_exists_in_array
 
     ignore = lambda x: x
 

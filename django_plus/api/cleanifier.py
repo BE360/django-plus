@@ -181,3 +181,15 @@ def clean_pair_list_generator(first_cleaner=None, second_cleaner=None, list_sepa
         return result
 
     return clean
+
+
+def clean_exists_in_array(values_list: list):
+
+    def clean(val):
+
+        if val in values_list:
+            return val
+        else:
+            return None
+
+    return clean
