@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 
 from admin_plus.urls import AdminUrl
 from admin_plus.utils.array_utils import append, append_list
+import copy
 
 # this line is for indicating register is used in import lines. (register is used outside of this module)
 if register:
@@ -19,6 +20,8 @@ class AdvancedAdmin(ModelAdmin):
     list_display_css = []
 
     fieldsets_conditions = []  # (field, appear_condition, readonly_condition)
+
+    __fieldsets__ = None
 
     def __init__(self, model, admin_site):
         self.model = model
@@ -43,7 +46,10 @@ class AdvancedAdmin(ModelAdmin):
 
     def get_fieldsets(self, request, obj=None):
 
-        fieldset = super(AdvancedAdmin, self).get_fieldsets(request, obj)
+        if self.__fieldsets__ is None:
+            self.__fieldsets__ = super(AdvancedAdmin, self).get_fieldsets(request, obj)
+
+        fieldset = copy.deepcopy(self.__fieldsets__)
 
         # removing fields with conditions
         to_remove_fields = self.get_to_remove_fields(obj)
