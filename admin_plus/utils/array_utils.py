@@ -36,6 +36,16 @@ def append(iterator, obj, unique=False):
         return iterator + [obj]
 
 
+def insert_first(iterator, obj, unique=False):
+    if unique and obj in iterator:
+        return iterator
+
+    try:
+        return (obj, ) + iterator
+    except:
+        return [obj] + iterator
+
+
 def append_list(iterator, obj_list, unique=False):
     for obj in obj_list:
         iterator = append(iterator, obj, unique=unique)

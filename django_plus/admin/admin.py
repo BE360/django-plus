@@ -3,7 +3,7 @@ from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.http import HttpResponseRedirect
 
 from admin_plus.urls import AdminUrl
-from admin_plus.utils.array_utils import append, append_list
+from admin_plus.utils.array_utils import append, append_list, insert_first
 import copy
 
 # this line is for indicating register is used in import lines. (register is used outside of this module)
@@ -22,6 +22,12 @@ class AdvancedAdmin(ModelAdmin):
     fieldsets_conditions = []  # (field, appear_condition, readonly_condition)
 
     __fieldsets__ = None
+
+    __readonly_fields__ = [
+        'get_list_item_initializer',
+        'get_media_files_for_main_page',
+        'get_media_files_for_list_page'
+    ]
 
     def __init__(self, model, admin_site):
         self.model = model
@@ -67,8 +73,7 @@ class AdvancedAdmin(ModelAdmin):
         return fieldset
 
     def get_readonly_fields(self, request, obj=None):
-        readonly_fields = ['get_media_files_for_main_page', 'get_media_files_for_list_page'] + \
-                          self.get_should_be_readonly_fields(obj)
+        readonly_fields = self.__readonly_fields__ + self.get_should_be_readonly_fields(obj)
 
         readonly = super(AdvancedAdmin, self).get_readonly_fields(request, obj)
 
@@ -77,6 +82,7 @@ class AdvancedAdmin(ModelAdmin):
     def get_list_display(self, request):
         list_display = super(AdvancedAdmin, self).get_list_display(request)
 
+        list_display = insert_first(list_display, 'get_list_item_initializer')
         return append(list_display, 'get_media_files_for_list_page', unique=True)
 
     def get_to_remove_fields(self, obj):
@@ -162,3 +168,11 @@ class AdvancedAdmin(ModelAdmin):
             return super(AdvancedAdmin, self).response_add(request, obj, post_url_continue)
 
         return HttpResponseRedirect(_next)
+
+    def list_item_init(self, obj):
+        pass
+
+    def get_list_item_initializer(self, obj):
+        self.list_item_init(obj)
+        return ""
+    get_list_item_initializer.short_description = ""
