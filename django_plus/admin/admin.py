@@ -82,7 +82,7 @@ class AdvancedAdmin(ModelAdmin):
     def get_list_display(self, request):
         list_display = super(AdvancedAdmin, self).get_list_display(request)
 
-        list_display = insert_first(list_display, 'get_list_item_initializer')
+        list_display = append(list_display, 'get_list_item_initializer')
         return append(list_display, 'get_media_files_for_list_page', unique=True)
 
     def get_to_remove_fields(self, obj):
