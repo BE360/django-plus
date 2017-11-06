@@ -101,7 +101,7 @@ class AdvancedAdmin(ModelAdmin):
                                 to_remove_fields.append(field)
 
                         except AttributeError:
-                            pass
+                            to_remove_fields.append(field)
 
                 else:
                     to_remove_fields.append(field)
