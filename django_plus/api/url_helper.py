@@ -24,11 +24,12 @@ class UrlParam:
 
     ignore = lambda x: x
 
-    def __init__(self, key, data_type: str, stored_key: str=None, required: bool=False, default=None):
+    def __init__(self, key, data_type: str, stored_key: str=None, required: bool=False, default=None, meta=None):
         self.key = key
         self.data_type = data_type
         self.required = required
         self.default = default
+        self.meta = meta
 
         if stored_key is None:
             self.stored_key = key
