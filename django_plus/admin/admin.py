@@ -2,8 +2,8 @@ from django.contrib.admin import register, ModelAdmin
 from django.contrib.staticfiles.templatetags.staticfiles import static
 from django.http import HttpResponseRedirect
 
-from admin_plus.urls import AdminUrl
-from admin_plus.utils.array_utils import append, append_list, insert_first
+from django_plus.admin.urls import AdminUrl
+from django_plus.admin.utils.array_utils import append, append_list
 import copy
 
 # this line is for indicating register is used in import lines. (register is used outside of this module)
