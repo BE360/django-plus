@@ -167,9 +167,27 @@ def clean_domain(url):
     try:
         url = url.replace("http://", "")
         url = url.replace("https://", "")
-        url = url.replace("www.", "")
+        if url.startswith("www."):
+            url = url[4:]
+
         url_arr = url.split("/")
         url = url_arr[0]
+        return url
+    except:
+        return None
+
+
+def clean_url_protocol_and_www(url):
+    """
+    Clean Domain only for example: http://www.google.com/something will turn to google.com/something
+    :param url:
+    :return:
+    """
+    try:
+        url = url.replace("http://", "")
+        url = url.replace("https://", "")
+        if url.startswith("www."):
+            url = url[4:]
         return url
     except:
         return None
@@ -219,3 +237,4 @@ def clean_exists_in_array(values_list: list):
             return None
 
     return clean
+
