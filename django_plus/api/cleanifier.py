@@ -187,6 +187,8 @@ def clean_url_protocol_and_www(url):
     try:
         url = url.replace("http://", "")
         url = url.replace("https://", "")
+        if url.startswith('//'):
+            url = url[2:]
         if url.startswith("www."):
             url = url[4:]
         return url
