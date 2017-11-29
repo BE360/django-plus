@@ -238,3 +238,13 @@ def clean_exists_in_array(values_list: list):
 
     return clean
 
+
+def clean_dict(params: list):
+
+    from django_plus.api import UrlParam
+
+    def clean(data: dict):
+
+        return UrlParam.clean_data(data, params)
+
+    return clean

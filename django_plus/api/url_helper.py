@@ -22,6 +22,8 @@ class UrlParam:
     hash_list = cleaners.clean_by_hash_table_list
     hash = cleaners.clean_by_hash_table
 
+    dictionary = cleaners.clean_dict
+
     ignore = lambda x: x
 
     def __init__(self, key, data_type: str, stored_key: str=None, required: bool=False, default=None, meta=None):
