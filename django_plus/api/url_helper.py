@@ -23,8 +23,9 @@ class UrlParam:
     hash = cleaners.clean_by_hash_table
 
     dictionary = cleaners.clean_dict
+    json = cleaners.clean_json
 
-    ignore = lambda x: x
+    ignore = lambda x: None
 
     def __init__(self, key, data_type: str, stored_key: str=None, required: bool=False, default=None, meta=None):
         self.key = key
