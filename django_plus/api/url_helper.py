@@ -22,13 +22,17 @@ class UrlParam:
     hash_list = cleaners.clean_by_hash_table_list
     hash = cleaners.clean_by_hash_table
 
-    ignore = lambda x: x
+    dictionary = cleaners.clean_dict
+    json = cleaners.clean_json
 
-    def __init__(self, key, data_type: str, stored_key: str=None, required: bool=False, default=None):
+    ignore = lambda x: None
+
+    def __init__(self, key, data_type: str, stored_key: str=None, required: bool=False, default=None, meta=None):
         self.key = key
         self.data_type = data_type
         self.required = required
         self.default = default
+        self.meta = meta
 
         if stored_key is None:
             self.stored_key = key
