@@ -1,3 +1,4 @@
+from datetime import timedelta
 
 
 def fa_convert(latin_str: str):
@@ -16,3 +17,7 @@ def fa_convert(latin_str: str):
         return latin_str
     except:
         return latin_str
+
+
+def fa_timedelta(_timedelta: timedelta):
+    return fa_convert(str(_timedelta).replace("days", "روز"))
