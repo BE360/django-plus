@@ -20,4 +20,6 @@ def fa_convert(latin_str: str):
 
 
 def fa_timedelta(_timedelta: timedelta):
-    return fa_convert(str(_timedelta).replace("days", "روز"))
+    to_persian = str(_timedelta).replace("days", "روز").replace("day", "روز").split('.')[0]
+
+    return fa_convert(to_persian)
