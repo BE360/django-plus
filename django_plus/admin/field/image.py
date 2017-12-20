@@ -1,7 +1,8 @@
 from django_plus.admin.field import admin_field_generator
+from django_plus.admin import html_tags
 
 
-def image(verbose_name="", width_px=200):
+def image(verbose_name="", width_px=200, clickable=True):
 
     def function_changer(func, admin_inst, model_inst):
         """
@@ -12,7 +13,13 @@ def image(verbose_name="", width_px=200):
         """
 
         image_link = func(admin_inst, model_inst)
+        image_html = "<img style='width:%spx' src='%s'/>" % (width_px, image_link)
 
-        return "<img style='width:%spx' src='%s'/>" % (width_px, image_link)
+        if clickable:
+            href = image_link
+
+            return html_tags.anchor_tag(image_html, href, target='_blank')
+
+        return image_html
 
     return admin_field_generator(verbose_name=verbose_name, function_changer=function_changer, html=True)
