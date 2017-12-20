@@ -5,3 +5,4 @@ from .datetime import datetime
 from .timedelta import timedelta
 from .template import template
 from .url import url
+from .image import image
