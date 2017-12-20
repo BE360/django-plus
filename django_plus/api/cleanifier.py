@@ -1,5 +1,6 @@
 from dateutil import parser as dateutil_parser
 import os
+import json
 
 
 def clean_string(string):
@@ -186,6 +187,8 @@ def clean_url_protocol_and_www(url):
     try:
         url = url.replace("http://", "")
         url = url.replace("https://", "")
+        if url.startswith('//'):
+            url = url[2:]
         if url.startswith("www."):
             url = url[4:]
         return url
@@ -238,3 +241,31 @@ def clean_exists_in_array(values_list: list):
 
     return clean
 
+
+def clean_dict(params: list):
+
+    from django_plus.api import UrlParam
+
+    def clean(data: dict):
+
+        return UrlParam.clean_data(data, params)
+
+    return clean
+
+
+def clean_json(params: list):
+
+    from django_plus.api import UrlParam
+
+    def clean(data_str: str):
+
+        try:
+            data_str = data_str.replace('\'', '\"')
+            data = json.loads(data_str)
+
+        except:
+            return None
+
+        return UrlParam.clean_data(data, params)
+
+    return clean
