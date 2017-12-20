@@ -1,10 +1,8 @@
 import re
 from django.utils import formats
 import jdatetime
-import deprecation
 
 
-@deprecation.deprecated(details="use fa package")
 def jalali(time, time_format=None):
 
     if time_format is None:
