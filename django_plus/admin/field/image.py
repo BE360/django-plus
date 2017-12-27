@@ -12,7 +12,11 @@ def image(verbose_name="", width_px=200, clickable=True):
         :return: html string
         """
 
-        image_link = func(admin_inst, model_inst) or ''
+        image_link = func(admin_inst, model_inst)
+
+        if not image_link:
+            return ""
+
         image_html = "<img style='width:%spx' src='%s'/>" % (width_px, image_link)
 
         if clickable:
