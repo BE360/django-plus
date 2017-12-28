@@ -89,6 +89,9 @@ def convert_str_to_counter(value_str: str, age_days: int = None, return_partial_
     + partial timings dict if 'return_partial_times' is True
     """
 
+    if not value_str:
+        return Counter()
+
     # removing timestamp from beginning of cookie
     value_str = str(list(value_str.split(TIME_SEPARATOR))[-1])
 
