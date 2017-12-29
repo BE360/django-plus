@@ -1,6 +1,6 @@
-from dateutil import parser as dateutil_parser
-import os
 import json
+
+from dateutil import parser as dateutil_parser
 
 
 def clean_string(string):

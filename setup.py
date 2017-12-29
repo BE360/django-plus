@@ -21,7 +21,8 @@ setup(
     install_requires=[
         'django',
         'jdatetime',
-        'deprecation'
+        'deprecation',
+        'python-dateutil'
     ],
     classifiers=[
         'Environment :: Web Environment',
