@@ -31,13 +31,20 @@ class UrlParam:
         self.key = key
         self.data_type = data_type
         self.required = required
-        self.default = default
+        self.__default = default
         self.meta = meta
 
         if stored_key is None:
             self.stored_key = key
         else:
             self.stored_key = stored_key
+
+    def get_default(self):
+
+        if callable(self.__default):
+            return self.__default()
+        else:
+            return self.__default
 
     @staticmethod
     def clean_data(data: dict, params: List['UrlParam']):
@@ -63,8 +70,9 @@ class UrlParam:
 
                 if value is None:
 
-                    if param.default is not None:
-                        value = param.default
+                    default = param.get_default()
+                    if default is not None:
+                        value = default
 
                     elif required:
                         return None
@@ -74,8 +82,10 @@ class UrlParam:
 
                     if value is None:
 
-                        if param.default is not None:
-                            value = param.default
+                        default = param.get_default()
+
+                        if default is not None:
+                            value = default
 
                         elif required:
                             return None
