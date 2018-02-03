@@ -17,6 +17,8 @@ def url(verbose_name="", title=None, path_to_field=None):
 
         if title is None:
             url_title = link.replace('https://', '').replace('http://', '')
+            if url_title.endswith('/'):
+                url_title = url_title[:-1]
         else:
             url_title = title
 
