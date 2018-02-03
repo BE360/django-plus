@@ -16,7 +16,7 @@ def url(verbose_name="", title=None, path_to_field=None):
             link = 'http://' + link
 
         if title is None:
-            url_title = link
+            url_title = link.replace('https://', '').replace('http://', '')
         else:
             url_title = title
 
