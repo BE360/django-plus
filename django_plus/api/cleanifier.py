@@ -269,3 +269,27 @@ def clean_json(params: list):
         return UrlParam.clean_data(data, params)
 
     return clean
+
+
+def clean_list(separator='-', item_cleaner=None):
+
+    def clean(val):
+        val = clean_string(val)
+
+        if val is None or len(val) == 0:
+            return None
+
+        valid_items = []
+        items = val.split(separator)
+
+        for item in items:
+
+            if item_cleaner:
+                item = item_cleaner(item)
+
+            if item is not None:
+                valid_items.append(item)
+
+        return valid_items
+
+    return clean

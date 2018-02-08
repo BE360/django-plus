@@ -16,6 +16,7 @@ class UrlParam:
     string = cleaners.clean_string
     advanced_string = cleaners.advanced_string_cleaner
     exists_in_array = cleaners.clean_exists_in_array
+    exists_in_list = cleaners.clean_exists_in_array
 
     datetime = cleaners.clean_datetime
 
