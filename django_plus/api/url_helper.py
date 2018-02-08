@@ -10,6 +10,7 @@ class UrlParam:
     int_pos0 = cleaners.clean_pos_integer0
     clamp_int = cleaners.clamp_int
     int_int_pair_list = cleaners.clean_pair_list_generator(int, int)
+    list = cleaners.clean_list
 
     bool = cleaners.clean_bool
 
