@@ -50,8 +50,12 @@ def admin_field_generator(verbose_name, function_changer=None, path_to_field=Non
             else:
                 result = default_function_changer(func, admin_inst, model_inst)
 
-            if limit > 0 and len(result) > limit:
-                result = result[:limit] + '...'
+            if limit >= 0:
+                if html:
+                    raise Exception("Cannot set limit on html fields")
+
+                elif len(result) > limit:
+                    result = result[:limit] + '...'
 
             if not wrap_white_space:
                 result = "<span style='white-space: nowrap;'>%s</span>" % result

@@ -22,6 +22,9 @@ def url(verbose_name="", title=None, path_to_field=None, limit=-1, wrap_white_sp
         else:
             url_title = title
 
+        if limit >= 0 and len(url_title) > limit:
+            url_title = url_title[:limit] + '...'
+
         return anchor_tag(url_title, link, target='_blank')
 
     return admin_field_generator(
@@ -30,6 +33,5 @@ def url(verbose_name="", title=None, path_to_field=None, limit=-1, wrap_white_sp
         boolean=False,
         path_to_field=path_to_field,
         function_changer=function_changer,
-        limit=limit,
         wrap_white_space=wrap_white_space
     )
