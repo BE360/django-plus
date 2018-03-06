@@ -1,7 +1,7 @@
 
 
 def admin_field_generator(verbose_name, function_changer=None, path_to_field=None, html=False,
-                          boolean=False):
+                          boolean=False, limit=-1, wrap_white_space=True):
     """
     This function generates admin_get decorators for being used in admin.py field methods.
     :param function_changer: this function holds the main logic of our decorator. This function has three \
@@ -12,6 +12,8 @@ def admin_field_generator(verbose_name, function_changer=None, path_to_field=Non
     :param html: a boolean which indicates it has html content or no
     :param verbose_name: if provided it would be the verbose_name of column
     :param boolean: a boolean field which indicates that the output of func is boolean or no
+    :param limit: max number of characters
+    :param wrap_white_space: should wrap white space or not
     :return:
     """
 
@@ -44,9 +46,17 @@ def admin_field_generator(verbose_name, function_changer=None, path_to_field=Non
                 wrapped.short_description = model_inst._meta.get_field(path_to_field).verbose_name
 
             if function_changer:
-                return function_changer(func, admin_inst, model_inst)
+                result = function_changer(func, admin_inst, model_inst)
             else:
-                return default_function_changer(func, admin_inst, model_inst)
+                result = default_function_changer(func, admin_inst, model_inst)
+
+            if limit > 0 and len(result) > limit:
+                result = result[:limit] + '...'
+
+            if not wrap_white_space:
+                result = "<span style='white-space: nowrap;'>%s</span>" % result
+
+            return result
 
         if verbose_name:
             wrapped.short_description = verbose_name
@@ -57,7 +67,7 @@ def admin_field_generator(verbose_name, function_changer=None, path_to_field=Non
         if path_to_field:
             wrapped.admin_order_field = path_to_field
 
-        wrapped.allow_tags = html
+        wrapped.allow_tags = html or not wrap_white_space
         wrapped.boolean = boolean
 
         return wrapped

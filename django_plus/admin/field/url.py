@@ -2,7 +2,7 @@ from ._generator_ import admin_field_generator
 from django_plus.admin.html_tags import anchor_tag
 
 
-def url(verbose_name="", title=None, path_to_field=None, title_limit=-1):
+def url(verbose_name="", title=None, path_to_field=None, limit=-1, wrap_white_space=True):
     """
     Function should return a url link
     :param verbose_name:
@@ -22,9 +22,6 @@ def url(verbose_name="", title=None, path_to_field=None, title_limit=-1):
         else:
             url_title = title
 
-        if title_limit > 0 and len(url_title) > title_limit:
-            url_title = url_title[:title_limit] + '...'
-
         return anchor_tag(url_title, link, target='_blank')
 
     return admin_field_generator(
@@ -32,5 +29,7 @@ def url(verbose_name="", title=None, path_to_field=None, title_limit=-1):
         html=True,
         boolean=False,
         path_to_field=path_to_field,
-        function_changer=function_changer
+        function_changer=function_changer,
+        limit=limit,
+        wrap_white_space=wrap_white_space
     )
