@@ -146,10 +146,16 @@ class AdvancedAdmin(ModelAdmin):
         body = "<style>.%s{display:None;}</style>" % fieldname
 
         for c in css:
-            body += '<link rel="stylesheet" type="text/css" href="{0}" />'.format(static(c))
+            if not c.startswith('http'):
+                c = static(c)
+
+            body += '<link rel="stylesheet" type="text/css" href="{0}" />'.format(c)
 
         for j in js:
-            body += '<script src="{0}"></script>'.format(static(j))
+            if not j.startswith('http'):
+                j = static(j)
+
+            body += '<script src="{0}"></script>'.format(j)
 
         return body
 
