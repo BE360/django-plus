@@ -5,6 +5,7 @@ from django.http import HttpResponseRedirect
 from django_plus.admin.urls import AdminUrl
 from django_plus.admin.utils.array_utils import append, append_list
 import copy
+from urllib.parse import unquote
 
 # this line is for indicating register is used in import lines. (register is used outside of this module)
 if register:
@@ -147,13 +148,13 @@ class AdvancedAdmin(ModelAdmin):
 
         for c in css:
             if not c.startswith('http'):
-                c = static(c)
+                c = unquote(static(c))
 
             body += '<link rel="stylesheet" type="text/css" href="{0}" />'.format(c)
 
         for j in js:
             if not j.startswith('http'):
-                j = static(j)
+                j = unquote(static(j))
 
             body += '<script src="{0}"></script>'.format(j)
 
