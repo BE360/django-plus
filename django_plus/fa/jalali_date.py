@@ -1,6 +1,7 @@
 import re
 from django.utils import formats
 import jdatetime
+from django_plus.fa import fa_convert
 
 
 def jalali(time, time_format=None):
@@ -45,4 +46,4 @@ def jalali(time, time_format=None):
         pattern = re.compile(r'\b(' + '|'.join(weekdays_map.keys()) + r')\b')
         time_string = pattern.sub(lambda x: weekdays_map[x.group()], time_string)
 
-        return time_string
+        return fa_convert(time_string)

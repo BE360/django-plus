@@ -1,4 +1,4 @@
-from django_plus.persian_date import jalali, CUSTOM_DATE_FORMAT
+from django_plus.fa import jalali, CUSTOM_DATE_FORMAT
 from ._generator_ import admin_field_generator
 
 
