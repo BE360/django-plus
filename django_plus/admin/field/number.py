@@ -1,5 +1,6 @@
 from django_plus.fa import fa_convert
 from ._generator_ import admin_field_generator
+from .utils import str_periodic_inserter
 
 
 def number(verbose_name="", path_to_field=None, wrap_white_space=True, split_length=3,
@@ -14,12 +15,8 @@ def number(verbose_name="", path_to_field=None, wrap_white_space=True, split_len
         else:
             num = ""
 
-        if len(num) > 0 and split_length > 0:
-            num_reversed = num[::-1]
-            num_reverse_char_inserted = splitter.join(
-                num_reversed[i:i + split_length] for i in range(0, len(num), split_length)
-            )
-            num = num_reverse_char_inserted[::-1]
+        if num and split_length > 0 and splitter:
+            num = str_periodic_inserter(num, split_length, splitter)
 
         return num
 
