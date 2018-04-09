@@ -23,3 +23,32 @@ def fa_timedelta(_timedelta: timedelta):
     to_persian = str(_timedelta).replace("days", "روز").replace("day", "روز").split('.')[0]
 
     return fa_convert(to_persian)
+
+
+def fa_number(amount, number_split=3, splitter=','):
+    amount_str = fa_convert(str(amount))
+
+    if number_split > 0:
+        amount_str = str_periodic_inserter(amount_str, number_split, splitter)
+
+    return amount_str
+
+
+def fa_currency(amount, number_split=3, splitter=',', postfix="تومان"):
+
+    return fa_number(amount, number_split, splitter) + " " + postfix
+
+
+def str_periodic_inserter(target_str, parts_length, splitter, start_from_right=True):
+
+    if start_from_right:
+        target_str = target_str[::-1]
+
+    result = splitter.join(
+        target_str[i:i + parts_length] for i in range(0, len(target_str), parts_length)
+    )
+
+    if start_from_right:
+        result = result[::-1]
+
+    return result

@@ -1,6 +1,5 @@
-from django_plus.fa import fa_convert
+from django_plus.fa import fa_currency
 from ._generator_ import admin_field_generator
-from .utils import str_periodic_inserter
 
 
 def currency(verbose_name="", path_to_field=None, wrap_white_space=True,
@@ -11,18 +10,11 @@ def currency(verbose_name="", path_to_field=None, wrap_white_space=True,
         amount = func(admin, instance)
 
         if amount:
-            result = fa_convert(str(amount))
-
-            if result and splitter and split_length > 0:
-                result = str_periodic_inserter(result, split_length, splitter)
+            return fa_currency(amount, number_split=split_length, splitter=splitter,
+                               postfix=postfix)
 
         else:
-            result = ""
-
-        if len(postfix) > 0:
-            result += ' ' + postfix
-
-        return result
+            return ""
 
     return admin_field_generator(
         verbose_name=verbose_name,
