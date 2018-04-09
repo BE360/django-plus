@@ -1,15 +1,15 @@
-from django_plus.fa import jalali, CUSTOM_DATE_FORMAT
+from django_plus.fa.templatetags.fa_tags import fa_date_filter
 from ._generator_ import admin_field_generator
 
 
-def date(verbose_name="", path_to_field=None, time_format=CUSTOM_DATE_FORMAT,
+def date(verbose_name="", path_to_field=None, time_format='%Y-%m-%d',
          wrap_white_space=True):
 
     def function_changer(func, admin, instance):
 
         result_date = func(admin, instance)
         if result_date:
-            return jalali(result_date, time_format)
+            return fa_date_filter(result_date, time_format)
         else:
             return ""
 
@@ -19,4 +19,3 @@ def date(verbose_name="", path_to_field=None, time_format=CUSTOM_DATE_FORMAT,
         function_changer=function_changer,
         wrap_white_space=wrap_white_space
     )
-
