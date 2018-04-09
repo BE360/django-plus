@@ -9,7 +9,7 @@ register = template.Library()
 
 
 @register.filter(name='fa_date')
-def fa_date_filter(value, date_format='%Y-%m-%d'):
+def fa_date_filter(value, date_format='%Y/%m/%d'):
 
     if isinstance(value, datetime.date):
         value = jdatetime.date.fromgregorian(date=value)

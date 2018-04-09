@@ -2,7 +2,7 @@ from django_plus.fa.templatetags.fa_tags import fa_date_filter
 from ._generator_ import admin_field_generator
 
 
-def date(verbose_name="", path_to_field=None, time_format='%Y-%m-%d',
+def date(verbose_name="", path_to_field=None, time_format='%Y/%m/%d',
          wrap_white_space=True):
 
     def function_changer(func, admin, instance):
