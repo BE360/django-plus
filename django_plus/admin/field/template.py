@@ -12,8 +12,15 @@ def template(template_name, verbose_name=""):
         :param model_inst:
         :return:
         """
+
+        if hasattr(admin_inst, 'request'):
+            request = admin_inst.request
+        else:
+            request = None
+
         ctx = func(admin_inst, model_inst)
-        return render_to_string(template_name, ctx)
+
+        return render_to_string(template_name, ctx, request=request)
 
     return admin_field_generator(
         verbose_name=verbose_name,
