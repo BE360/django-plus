@@ -16,19 +16,24 @@ class BoolNode:
         self.right_node = right_node
 
     def __and__(self, other):
-        return type(self)().change_to_connector(self.AND, self, other)
+        connector = type(self)()
+        connector.change_to_connector(self.AND, self, other)
+        return connector
 
     def __or__(self, other):
-        return type(self)().change_to_connector(self.OR, self, other)
+        connector = type(self)()
+        connector.change_to_connector(self.OR, self, other)
+        return connector
 
     def __invert__(self):
         self.inverted = not self.inverted
+        return self
 
     def evaluate(self, *args, **kwargs):
 
         if self.is_connector:
-            left_result = self.left_node.evaluate()
-            right_result = self.right_node.evaluate()
+            left_result = self.left_node.evaluate(*args, **kwargs)
+            right_result = self.right_node.evaluate(*args, **kwargs)
 
             if self.action == self.AND:
                 connector_result = left_result and right_result
