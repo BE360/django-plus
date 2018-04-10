@@ -6,6 +6,7 @@ from django_plus.admin.urls import AdminUrl
 from django_plus.admin.utils.array_utils import append, append_list
 import copy
 from urllib.parse import unquote
+from django_plus.admin import M
 
 # this line is for indicating register is used in import lines. (register is used outside of this module)
 if register:
@@ -96,7 +97,11 @@ class AdvancedAdmin(ModelAdmin):
 
                 if appear_condition:
 
-                    if isinstance(appear_condition, str):
+                    if isinstance(appear_condition, M):
+                        if not appear_condition.evaluate(self, obj):
+                            to_remove_fields.append(field)
+
+                    elif isinstance(appear_condition, str):
                         try:
                             if not getattr(self, appear_condition)(obj):
                                 to_remove_fields.append(field)
@@ -119,7 +124,11 @@ class AdvancedAdmin(ModelAdmin):
 
                 if readonly_condition:
 
-                    if isinstance(readonly_condition, str):
+                    if isinstance(readonly_condition, M):
+                        if readonly_condition.evaluate(self, obj):
+                            should_be_readonly_fields.append(field)
+
+                    elif isinstance(readonly_condition, str):
                         try:
                             if getattr(self, readonly_condition)(obj):
                                 should_be_readonly_fields.append(field)

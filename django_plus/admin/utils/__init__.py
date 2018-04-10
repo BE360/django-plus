@@ -1,1 +1,2 @@
-from .m import M, BoolNode
+from .bool_node import BoolNode, bool_node_class_generator
+from .m import M
