@@ -9,7 +9,8 @@ def number(verbose_name="", path_to_field=None, wrap_white_space=True, split_len
 
         amount = func(admin, instance)
 
-        return fa_number(amount, number_split=split_length, splitter=splitter)
+        if amount:
+            return fa_number(amount, number_split=split_length, splitter=splitter)
 
     return admin_field_generator(
         verbose_name=verbose_name,
