@@ -2,7 +2,7 @@ from django_plus.fa.templatetags.fa_tags import fa_datetime_filter
 from ._generator_ import admin_field_generator
 
 
-def datetime(verbose_name="", path_to_field=None, time_format="%Y/%m/%d ساعت %H:%i:%s",
+def datetime(verbose_name="", path_to_field=None, time_format="%Y/%m/%d ساعت %H:%M:%S",
              wrap_white_space=True):
 
     def function_changer(func, admin, instance):
