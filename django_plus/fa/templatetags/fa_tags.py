@@ -20,6 +20,18 @@ def fa_date_filter(value, date_format='%Y/%m/%d'):
     return fa_convert(value.strftime(date_format))
 
 
+@register.filter(name='fa_datetime')
+def fa_datetime_filter(value, date_format='%Y/%m/%d ساعت %H:%i:%s'):
+
+    if isinstance(value, datetime.datetime):
+        value = jdatetime.datetime.fromgregorian(datetime=value)
+
+    if not isinstance(value, jdatetime.datetime):
+        raise Exception("Value type is not valid.")
+
+    return fa_convert(value.strftime(date_format))
+
+
 @register.filter(name='fa_currency')
 def fa_currency_filter(value):
 
