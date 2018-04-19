@@ -180,7 +180,7 @@ class AdvancedAdmin(ModelAdmin):
     def response_add(self, request, obj, post_url_continue=None):
         _next = request.GET.get('next', None)
 
-        if not _next:
+        if '_continue' in request.POST or not _next:
             return super(AdvancedAdmin, self).response_add(request, obj, post_url_continue)
 
         return HttpResponseRedirect(_next)
