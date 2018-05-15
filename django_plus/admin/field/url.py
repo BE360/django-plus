@@ -18,7 +18,7 @@ def url(verbose_name="", title=None, path_to_field=None, limit=-1, wrap_white_sp
         if not link and hide_on_null_link:
             return ''
 
-        if not link.startswith('http://') and not link.startswith('https://'):
+        if not link.startswith('/') and not link.startswith('http://') and not link.startswith('https://'):
             link = 'http://' + link
 
         if title is None:
