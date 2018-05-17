@@ -9,7 +9,7 @@ def number(verbose_name="", path_to_field=None, wrap_white_space=True, split_len
 
         amount = func(admin, instance)
 
-        if amount:
+        if amount is not None:
             return fa_number(amount, number_split=split_length, splitter=splitter)
 
     return admin_field_generator(
