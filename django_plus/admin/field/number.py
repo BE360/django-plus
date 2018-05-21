@@ -12,6 +12,9 @@ def number(verbose_name="", path_to_field=None, wrap_white_space=True, split_len
         if amount is not None:
             return fa_number(amount, number_split=split_length, splitter=splitter)
 
+        else:
+            return 0
+
     return admin_field_generator(
         verbose_name=verbose_name,
         path_to_field=path_to_field,
