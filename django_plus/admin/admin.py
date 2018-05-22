@@ -52,6 +52,10 @@ class AdvancedAdmin(ModelAdmin):
         self.request = request
         return super(AdvancedAdmin, self).changelist_view(request, extra_context)
 
+    def add_view(self, request, form_url='', extra_context=None):
+        self.request = request
+        return super(AdvancedAdmin, self).add_view(request, form_url, extra_context)
+
     def get_fieldsets(self, request, obj=None):
 
         if self.__fieldsets__ is None:
