@@ -1,0 +1,23 @@
+{
+  "name": "djangoplus",
+  "version": "1.0.0",
+  "description": "Add utilities to Django",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/MyGearBox/DjangoPlus.git"
+  },
+  "author": "Reza Abbasi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/MyGearBox/DjangoPlus/issues"
+  },
+  "homepage": "https://gitlab.com/MyGearBox/DjangoPlus#README",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  }
+}
