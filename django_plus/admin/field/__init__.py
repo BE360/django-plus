@@ -8,3 +8,4 @@ from .url import url
 from .image import image
 from .number import number
 from .currency import currency
+from .table import table
