@@ -1,8 +1,13 @@
 import urllib
 
+import django
 import django.db.models as models
 from django.contrib.contenttypes.models import ContentType
-from django.core import urlresolvers
+
+if django.VERSION[0] == 1:
+    from django.core import urlresolvers
+else:
+    from django.urls import reverse as urlresolvers
 
 
 class AdminUrl:
