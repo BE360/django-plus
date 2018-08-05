@@ -20,6 +20,7 @@ class UrlParam:
     exists_in_list = cleaners.clean_exists_in_array
 
     datetime = cleaners.clean_datetime
+    date = cleaners.clean_date
 
     hash_list = cleaners.clean_by_hash_table_list
     hash = cleaners.clean_by_hash_table

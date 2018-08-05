@@ -159,6 +159,16 @@ def clean_datetime(date_str):
         return None
 
 
+def clean_date(date_str):
+    date = clean_datetime(date_str)
+
+    if date is None:
+        return None
+
+    else:
+        return date.date()
+
+
 def clean_domain(url):
     """
     Clean Domain only for example: http://www.google.com/something will turn to google.com
