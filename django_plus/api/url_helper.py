@@ -26,7 +26,9 @@ class UrlParam:
     hash = cleaners.clean_by_hash_table
 
     dictionary = cleaners.clean_dict
-    json = cleaners.clean_json
+    json = cleaners.clean_json_dict
+    dict_json = cleaners.clean_json_dict
+    list_json = cleaners.clean_json_list
 
     ignore = lambda x: None
 

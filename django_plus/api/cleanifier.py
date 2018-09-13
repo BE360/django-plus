@@ -263,18 +263,45 @@ def clean_dict(params: list):
     return clean
 
 
-def clean_json(params: list):
+def clean_simple_json(json_str):
+    try:
+        return json.loads(json_str)
+    except:
+        return None
+
+
+def clean_json_dict(params: list):
 
     from django_plus.api import UrlParam
 
     def clean(data_str: str):
+        data = clean_simple_json(data_str)
 
-        try:
-            data = json.loads(data_str)
-        except:
+        if not isinstance(data, dict):
             return None
 
         return UrlParam.clean_data(data, params)
+
+    return clean
+
+
+def clean_json_list(item_cleaner=None):
+    def clean(json_str: str):
+        items = clean_simple_json(json_str)
+
+        if not isinstance(items, list):
+            return None
+
+        valid_items = []
+
+        for item in items:
+            if item_cleaner:
+                item = item_cleaner(item)
+
+            if item is not None:
+                valid_items.append(item)
+
+        return valid_items
 
     return clean
 
