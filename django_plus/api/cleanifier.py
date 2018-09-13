@@ -270,9 +270,7 @@ def clean_json(params: list):
     def clean(data_str: str):
 
         try:
-            data_str = data_str.replace('\'', '\"')
             data = json.loads(data_str)
-
         except:
             return None
 
