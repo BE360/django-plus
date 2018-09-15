@@ -25,6 +25,7 @@ class UrlParam:
     hash_list = cleaners.clean_by_hash_table_list
     hash = cleaners.clean_by_hash_table
 
+    simple_dict = cleaners.clean_simple_dict
     dictionary = cleaners.clean_dict
     json = cleaners.clean_json_dict
     dict_json = cleaners.clean_json_dict

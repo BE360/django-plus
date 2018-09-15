@@ -263,6 +263,13 @@ def clean_dict(params: list):
     return clean
 
 
+def clean_simple_dict(data):
+    if isinstance(data, dict):
+        return data
+    else:
+        return None
+
+
 def clean_simple_json(json_str):
     try:
         return json.loads(json_str)
