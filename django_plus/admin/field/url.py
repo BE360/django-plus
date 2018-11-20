@@ -13,7 +13,12 @@ def url(verbose_name="", title=None, path_to_field=None, limit=-1, wrap_white_sp
     :param hide_on_null_link:
     """
     def function_changer(func, admin, instance):
-        link = func(admin, instance)
+        result = func(admin, instance)
+        if type(result) == tuple:
+            link, link_title = result
+        else:
+            link = result
+            link_title = None
 
         if not link and hide_on_null_link:
             return ''
@@ -21,10 +26,12 @@ def url(verbose_name="", title=None, path_to_field=None, limit=-1, wrap_white_sp
         if not link.startswith('/') and not link.startswith('http://') and not link.startswith('https://'):
             link = 'http://' + link
 
-        if title is None:
+        if title is None and not link_title:
             url_title = link.replace('https://', '').replace('http://', '')
             if url_title.endswith('/'):
                 url_title = url_title[:-1]
+        elif link_title:
+            url_title = link_title
         else:
             url_title = title
 

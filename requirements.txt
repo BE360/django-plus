@@ -1,0 +1,8 @@
+deprecation==2.0.5
+Django==1.11
+jdatetime==2.2.0
+packaging==18.0
+pyparsing==2.3.0
+python-dateutil==2.7.3
+pytz==2018.7
+six==1.11.0
